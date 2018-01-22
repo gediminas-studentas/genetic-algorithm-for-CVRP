@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Euclidean2D {
     public static double calcDistance(Point p1, Point p2) {
-        // compute Euclidean distance
+        // skaičiuoajmas euklido atstumas
         return Math.sqrt(Math.pow((p1.getX() - p2.getX()), 2) + Math.pow((p1.getY() - p2.getY()), 2));
     }
 

@@ -5,12 +5,11 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-//TODO: should be an interface
 public class Population {
 
     private List<Chromosome> chromosomes;
     private int populationLimit;
-    /** percentage of chromosomes copied to the next generation */
+    //chromosomų, paliekamų kitai kartai, procentas
     private double elitismRate;
 
     public Population(List<Chromosome> chromosomes, int populationLimit, double elitismRate) {
@@ -41,7 +40,7 @@ public class Population {
         final List<Chromosome> oldChromosomes = chromosomes;
         Collections.sort(oldChromosomes);
 
-        // index of the last "not good enough" chromosome
+        // paskutinės "nepakankamai geros" chromosomos indeksas
         int boundIndex = (int) Math.ceil((1.0 - elitismRate) * oldChromosomes.size());
         for (int i = boundIndex; i < oldChromosomes.size(); i++) {
             nextGenerationChromosomes.add(oldChromosomes.get(i));
@@ -51,12 +50,12 @@ public class Population {
     }
 
     public Chromosome getFittestChromosome() {
-        // best so far
+        // geriausia kolkas
         Chromosome bestChromosome = this.chromosomes.get(0);
         for (int i = 1; i < this.chromosomes.size(); i++) {
             Chromosome candidate = this.chromosomes.get(i);
             if (candidate.compareTo(bestChromosome) > 0) {
-                // better chromosome found
+                // rasta geresnė
                 bestChromosome = candidate;
             }
         }

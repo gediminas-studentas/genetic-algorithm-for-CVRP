@@ -1,10 +1,12 @@
 package cvrp.problem;
 
-import cvrp.problem.util.GeneticOperations;
-
 import java.util.Arrays;
 import java.util.Random;
 
+/**
+ * Dalinio atvaizdavimo krosoveris (PMX - angl. partially-mapped crossover).
+ * Ši procedūra dirba tik su chromosomų dalimi – atvaizdavimo sritimis – pasiskirsčiusiose tarp dviejų krosoverio taškų
+ */
 public class PMXCrossover implements CrossoverPolicy {
 
     @Override
@@ -25,10 +27,25 @@ public class PMXCrossover implements CrossoverPolicy {
         for(int pos=begin; pos<end; pos++) {
             int gene1 = first[pos];
             int gene2 = second[pos];
-            GeneticOperations.swapPosition(baby[0], gene1, gene2);
-            GeneticOperations.swapPosition(baby[1], gene1, gene2);
+            swapPosition(baby[0], gene1, gene2);
+            swapPosition(baby[1], gene1, gene2);
         }
 
         return baby;
+    }
+
+    public static void swapPosition(Integer[] genes, int gene1, int gene2) {
+        int pos1 = 0;
+        int pos2 = 0;
+        for (int i=0; i < genes.length; i++) {
+            if (genes[i] == gene1) {
+                pos1 = i;
+            }
+            if (genes[i] == gene2) {
+                pos2 = i;
+            }
+        }
+        genes[pos1] = gene2;
+        genes[pos2] = gene1;
     }
 }

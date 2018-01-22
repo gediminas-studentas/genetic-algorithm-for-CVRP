@@ -1,17 +1,16 @@
 package cvrp.problem;
 
 /**
- * Policy used to create a pair of new chromosomes by performing a crossover
- * operation on a source pair of chromosomes.
+ * Kryžminimo politika nurodo, kokia strategija bus naudojama kryžminant
  */
 public interface CrossoverPolicy {
 
     /**
-     * Perform a crossover operation on the given chromosomes.
+     * Kryžminimo operacijos atlikimas. Tvarka nesvarbi.
      *
-     * @param first the first chromosome.
-     * @param second the second chromosome.
-     * @return the pair of new chromosomes that resulted from the crossover.
+     * @param first pirmoji chromosoma
+     * @param second antroji chromosoma
+     * @return kryžminimo rezultatas - chromosomų pora
      */
     ChromosomePair crossover(Chromosome first, Chromosome second);
 }

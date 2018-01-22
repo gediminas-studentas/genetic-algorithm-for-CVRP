@@ -1,9 +1,15 @@
 package cvrp.problem;
 
+/**
+ * Klientas
+ */
 public class Customer {
 
+    //eilės numeris naudojamas genuose
     private int number;
+    //koordinatės
     private Point point;
+    //poreikis
     private int demand;
 
     public Customer(int number, Point point) {

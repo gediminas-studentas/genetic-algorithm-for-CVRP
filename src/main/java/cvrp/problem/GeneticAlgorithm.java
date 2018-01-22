@@ -24,10 +24,10 @@ public class GeneticAlgorithm {
     ) throws IllegalArgumentException {
 
         if (crossoverRate < 0 || crossoverRate > 1) {
-            throw new IllegalArgumentException("Crossover rate should be between 0..1");
+            throw new IllegalArgumentException("Kryžminimo dažnis turėtų buti tarp 0..1");
         }
         if (mutationRate < 0 || mutationRate > 1) {
-            throw new IllegalArgumentException("Mutation rate should be between 0..1");
+            throw new IllegalArgumentException("Mutavimo dažnis turėtų buti tarp 0..1");
         }
         this.crossoverPolicy = crossoverPolicy;
         this.crossoverRate = crossoverRate;
@@ -40,15 +40,15 @@ public class GeneticAlgorithm {
         Population nextGeneration = current.nextGeneration();
 
         while (nextGeneration.getPopulationSize() < nextGeneration.getPopulationLimit()) {
-            // select parent chromosomes
+            // pasirenkamos tėvinės chromosomos
             ChromosomePair pair = selectionPolicy.select(current);
 
-            // crossover?
+            // kryžminti?
             if (randomGenerator.nextDouble() < crossoverRate) {
                 pair = crossoverPolicy.crossover(pair.getFirst(), pair.getSecond());
             }
 
-            // mutation?
+            // mutuoti?
             if (randomGenerator.nextDouble() < mutationRate) {
                 pair = new ChromosomePair(
                         mutationPolicy.mutate(pair.getFirst()),
@@ -56,11 +56,11 @@ public class GeneticAlgorithm {
                 );
             }
 
-            // add the first chromosome to the population
+            // pridedama pirma chromosomą prie populaicijos
             nextGeneration.addChromosome(pair.getFirst());
-            // is there still a place for the second chromosome?
+            // ar dar yra laisvos vietos ?
             if (nextGeneration.getPopulationSize() < nextGeneration.getPopulationLimit()) {
-                // add the second chromosome to the population
+                // pridedama antra chromosomą prie populaicijos
                 nextGeneration.addChromosome(pair.getSecond());
             }
         }

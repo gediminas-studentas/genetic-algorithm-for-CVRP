@@ -3,9 +3,9 @@ package cvrp.problem;
 public interface MutationPolicy {
 
     /**
-     * Mutate the given chromosome.
-     * @param original the original chromosome.
-     * @return the mutated chromosome.
+     * Mutuoja dvi chromosomas
+     * @param original originali chromosoma.
+     * @return mutuota chromosoma
      */
     Chromosome mutate(Chromosome original);
 }

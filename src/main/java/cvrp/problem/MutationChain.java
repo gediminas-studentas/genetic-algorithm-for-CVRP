@@ -1,10 +1,10 @@
 package cvrp.problem;
 
-import org.apache.commons.math3.random.JDKRandomGenerator;
-import org.apache.commons.math3.random.RandomGenerator;
-
 import java.util.List;
 
+/**
+ * Pagalbinė klasė padedanti lengviau sujungti mutacijos operatorius į eilę
+ */
 public class MutationChain implements MutationPolicy {
 
     private final List<MutationPolicy> mutatators;

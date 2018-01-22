@@ -11,6 +11,9 @@ import java.util.stream.Collectors;
 
 import static cvrp.problem.util.Euclidean2D.calcDistanceMatrix;
 
+/**
+ * Klasė skirta nuskaityti iš standartizuoti failo ir išsaugoti CVRP problemos parametrus
+ */
 public class CVRPProblem {
 
     private int vehiclesNumber;
@@ -39,7 +42,7 @@ public class CVRPProblem {
             }
 
 
-            br.readLine(); // this line is to jump the "NODE_COORD_SECTION" line
+            br.readLine(); // šokame prie "NODE_COORD_SECTION" eilutės
 
             int i = 0;
             while ((line = br.readLine()) != null) {
@@ -60,7 +63,7 @@ public class CVRPProblem {
                     }
                     customers.add(new Customer(i++, new Point(x, y)));
                 } else {
-                    if (i == 0) { //if depot
+                    if (i == 0) { //jeigu sandelis
                         i++;
                         continue;
                     }

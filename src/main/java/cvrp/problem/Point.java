@@ -1,5 +1,8 @@
 package cvrp.problem;
 
+/**
+ * Koordinatė
+ */
 public class Point {
    private final float x;
    private final float y;

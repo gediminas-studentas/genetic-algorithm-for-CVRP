@@ -3,6 +3,9 @@ package cvrp.problem;
 import org.apache.commons.math3.random.JDKRandomGenerator;
 import org.apache.commons.math3.random.RandomGenerator;
 
+/**
+ * Atsitiktinė atranka. Visiškai atsitiktinai atrenka chromosomų porą.
+ */
 public class RandomSelection implements SelectionPolicy {
 
     private static RandomGenerator randomGenerator = new JDKRandomGenerator();

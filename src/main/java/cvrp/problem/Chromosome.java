@@ -5,16 +5,18 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-//TODO: Chromosome should be an interface
+/**
+ * Chromosoma sauganti savyje genus ir galinti apskaičiuoti tinkamumo įvertį.
+ */
 public class Chromosome implements Comparable<Chromosome>, Fitness {
 
-    private Integer[] genes;
+    private Integer[] genes; //eilės tvarka nurodomi klientai, pas kurį bus važiuojama pirmiausia.
     private Double fitness = NO_FITNESS;
 
     private final CVRPProblem problem;
     private final Fitness fitnessSupplier;
-    /** Value assigned when no fitness has been computed yet. */
-    private static final double NO_FITNESS = Double.NEGATIVE_INFINITY;
+
+    private static final double NO_FITNESS = Double.NEGATIVE_INFINITY;  // Reikšmė priskiriama nesant apskaičiavus tinkamumo įverčio
 
     private static final int PENALIZE_OVERLOAD = 25;
 
@@ -31,7 +33,10 @@ public class Chromosome implements Comparable<Chromosome>, Fitness {
             int vehicleGeneStartIndex = globalGeneIterator;
 
             double fitness = 0.0D;
-            //SPLIT by vehicles
+            //Konversijos algoritmas.
+            //Ji paremta sunkvežimių talpos apribojimu. Konversijos algoritmas skaitydamas klientų seką tuo pačiu metu
+            //skaičiuoja ir sunkvežimio užpildymą. Viršijus leistiną talpą yra traktuojama, kad genų seka žymi sekančio sunkvežimio maršrutą.
+            //Ši logika tęsiama iki kol perskaitomi visi genai. Rezultate aiškiai žinome kokį maršrutą pasirinko kiekvienas iš sunkvežimių,
             for (int vehicleNr = 1; vehicleNr <= this.problem.getVehiclesNumber(); vehicleNr++) {
 
                 int vehicleCoveredDemand = 0;
@@ -45,6 +50,8 @@ public class Chromosome implements Comparable<Chromosome>, Fitness {
                     }
                 }
 
+                //Jei neefektyviai paskirstėme vietas - tuomet paskutinis automobilis viršys talpą
+                //Tokiu atveju būtina pridėti baudos taškų prie tinkamumo, tam, kad ši chromosoma nebūtų laikoma tinkama
                 if (vehicleCoveredDemand >  problem.getMaxVehicleCapacity()) {
                     fitness += (vehicleCoveredDemand - problem.getMaxVehicleCapacity()) * PENALIZE_OVERLOAD;
                 }
@@ -57,8 +64,9 @@ public class Chromosome implements Comparable<Chromosome>, Fitness {
 
                 vehicleGeneStartIndex = globalGeneIterator;
             }
-
+            //tinkakmumo įverčio "apvertimas" dėl problemos specifikos - ieškoma ne didžiausio, o mažiausio atstumo
             return -1 * fitness;
+
         };
 
     }
@@ -91,7 +99,6 @@ public class Chromosome implements Comparable<Chromosome>, Fitness {
     }
 
     private static double computeDistance(Integer[] genes, Depot depot, double[][] euclideanDistanceMatrix) {
-       // double distance = euclideanDistanceMatrix[depot.getNumber()][genes[0]]; //
         double distance = 0.0;
         int lastVisited = depot.getNumber();
         for (int i = 0; i < genes.length; i++) {

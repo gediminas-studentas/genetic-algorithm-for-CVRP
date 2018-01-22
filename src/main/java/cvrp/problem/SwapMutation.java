@@ -3,6 +3,10 @@ package cvrp.problem;
 import org.apache.commons.math3.random.JDKRandomGenerator;
 import org.apache.commons.math3.random.RandomGenerator;
 
+/**
+ * Sukeitimo operacija.
+ * Jos metu yra sukeičiami vietomis du atsitiktinai parinkti genai.
+ */
 public class SwapMutation implements MutationPolicy {
 
     private static RandomGenerator randomGenerator = new JDKRandomGenerator();

@@ -3,6 +3,10 @@ package cvrp.problem;
 import org.apache.commons.math3.random.JDKRandomGenerator;
 import org.apache.commons.math3.random.RandomGenerator;
 
+/**
+ * Įdėjimo operacija.
+ * Jos metu atsitiktinis chromosomos alelių ruožas yra pastumiamas reikmšėmis per 1 poziciją
+ */
 public class InsertMutation implements MutationPolicy {
 
     private static RandomGenerator randomGenerator = new JDKRandomGenerator();
